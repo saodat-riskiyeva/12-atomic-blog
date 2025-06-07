@@ -10,6 +10,11 @@ function createRandomPost() {
 }
 
 function App() {
+  const [posts, setPosts] = useState(() =>
+    Array.from({ length: 30 }, () => createRandomPost())
+  );
+  // const [searchQuery, setSearchQuery] = useState("");
+
   const [isFakeDark, setIsFakeDark] = useState(false);
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   useEffect(
@@ -22,9 +27,9 @@ function App() {
   const archiveOptions = useMemo(() => {
     return {
       show: false,
-      title: "Post archive in addition to main posts",
+      title: `Post archive in addition to ${posts.length} main posts`,
     };
-  }, []);
+  }, [posts.length]);
 
   return (
     <section>
